@@ -123,7 +123,10 @@ The API is the same, with the adjustments you would expect from moving to TypeSc
 
 ## Project status
 
-This package currently ships the TypeScript facade, TurboModule spec, and native module scaffolding (Kotlin on Android, Swift/Objective-C++ on iOS). The native signing logic (Keystore/Secure Enclave key generation, PIN digest storage, EIP-191/EIP-712 signing) is stubbed with `TODO`s pending integration of the BMONISigner native SDKs.
+- **Android** — implemented. `EthSigner` (Bouncy Castle) generates secp256k1 keys and produces recoverable, low-s ECDSA signatures; `SecureStore` persists the private key and PIN digest only as Keystore-backed `EncryptedSharedPreferences` ciphertext.
+- **iOS** — implemented. `EthSigner` (secp256k1.swift + CryptoSwift for Keccak-256) generates secp256k1 keys and produces recoverable ECDSA signatures; `SecureStore` persists the private key and PIN digest in the Keychain under `kSecAttrAccessibleWhenUnlockedThisDeviceOnly`. Not yet built/verified against a real Xcode toolchain — see the note in `ios/EthSigner.swift` on confirming the exact `secp256k1.swift` API surface on first build.
+
+Both platforms use identical parameters (PBKDF2-HMAC-SHA256, 210k iterations; same EIP-191 digest construction) so a signature produced from the same key/message is byte-identical across platforms, even though wallets themselves are device-local and never migrate between platforms.
 
 ## License
 

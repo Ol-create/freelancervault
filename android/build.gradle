@@ -55,5 +55,10 @@ repositories {
 dependencies {
   implementation 'com.facebook.react:react-android'
   implementation 'androidx.security:security-crypto:1.1.0-alpha06'
+  // secp256k1 keygen/ECDSA: AndroidOpenSSL's JCE provider doesn't expose the
+  // secp256k1 named curve, so key generation and signing use Bouncy Castle's
+  // low-level API directly instead of java.security. Keystore is only used
+  // to wrap the resulting key at rest (see SecureStore), not to generate it.
+  implementation 'org.bouncycastle:bcprov-jdk18on:1.78.1'
   // implementation 'com.bmoni:bmoni-signer-android:<version>' // BMONISigner AAR (arm64-v8a only)
 }
