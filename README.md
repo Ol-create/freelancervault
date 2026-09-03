@@ -123,7 +123,8 @@ The API is the same, with the adjustments you would expect from moving to TypeSc
 
 ## Project status
 
-This package currently ships the TypeScript facade, TurboModule spec, and native module scaffolding (Kotlin on Android, Swift/Objective-C++ on iOS). The native signing logic (Keystore/Secure Enclave key generation, PIN digest storage, EIP-191/EIP-712 signing) is stubbed with `TODO`s pending integration of the BMONISigner native SDKs.
+- **Android** — implemented. `EthSigner` (Bouncy Castle) generates secp256k1 keys and produces recoverable, low-s ECDSA signatures; `SecureStore` persists the private key and PIN digest only as Keystore-backed `EncryptedSharedPreferences` ciphertext.
+- **iOS** — not yet implemented. `BmoniEmbeddedSdkImpl.swift` still stubs every method with `reject("UNKNOWN", "... not implemented yet")` pending a Secure Enclave-backed implementation.
 
 ## License
 
