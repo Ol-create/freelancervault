@@ -1,0 +1,59 @@
+buildscript {
+  ext.getExtOrDefault = { name ->
+    return rootProject.ext.has(name) ? rootProject.ext.get(name) : project.properties['BmoniEmbeddedSdk_' + name]
+  }
+
+  repositories {
+    google()
+    mavenCentral()
+  }
+
+  dependencies {
+    classpath 'com.android.tools.build:gradle:8.2.1'
+    classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.24'
+  }
+}
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'com.facebook.react'
+
+android {
+  namespace "com.bmoniembeddedsdk"
+  compileSdkVersion getExtOrDefault('compileSdkVersion') ?: 34
+
+  defaultConfig {
+    minSdkVersion getExtOrDefault('minSdkVersion') ?: 24
+    targetSdkVersion getExtOrDefault('targetSdkVersion') ?: 34
+    ndk {
+      // BMONISigner AAR ships an arm64-v8a slice only.
+      abiFilters "arm64-v8a"
+    }
+  }
+
+  buildTypes {
+    release {
+      minifyEnabled false
+    }
+  }
+
+  lintOptions {
+    disable 'GradleCompatible'
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_17
+    targetCompatibility JavaVersion.VERSION_17
+  }
+}
+
+repositories {
+  mavenCentral()
+  google()
+}
+
+dependencies {
+  implementation 'com.facebook.react:react-android'
+  implementation 'androidx.security:security-crypto:1.1.0-alpha06'
+  // implementation 'com.bmoni:bmoni-signer-android:<version>' // BMONISigner AAR (arm64-v8a only)
+}

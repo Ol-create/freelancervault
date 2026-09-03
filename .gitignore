@@ -1,0 +1,19 @@
+node_modules/
+lib/
+
+# Android
+android/build/
+android/.cxx/
+android/.gradle/
+*.iml
+.idea/
+
+# iOS
+ios/build/
+ios/Pods/
+ios/*.xcworkspace
+*.xcuserstate
+
+# misc
+.DS_Store
+*.log

@@ -1,0 +1,74 @@
+{
+  "name": "bmoni_embedded_sdk",
+  "version": "0.1.0",
+  "description": "On-device Ethereum wallet provisioning and signing for React Native (Android Keystore / iOS Secure Enclave).",
+  "main": "lib/commonjs/index.js",
+  "module": "lib/module/index.js",
+  "types": "lib/typescript/src/index.d.ts",
+  "react-native": "src/index.tsx",
+  "source": "src/index.tsx",
+  "files": [
+    "src",
+    "lib",
+    "android",
+    "ios",
+    "bmoni_embedded_sdk.podspec",
+    "!ios/build",
+    "!android/build",
+    "!android/.cxx",
+    "!**/__tests__"
+  ],
+  "scripts": {
+    "build": "bob build",
+    "typecheck": "tsc --noEmit",
+    "clean": "rimraf lib android/build android/.cxx"
+  },
+  "keywords": [
+    "react-native",
+    "ethereum",
+    "wallet",
+    "secp256k1",
+    "eip-191",
+    "eip-712",
+    "secure-enclave",
+    "android-keystore"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bmoni/bmoni_embedded_sdk.git"
+  },
+  "license": "MIT",
+  "codegenConfig": {
+    "name": "BmoniEmbeddedSdkSpec",
+    "type": "modules",
+    "jsSrcsDir": "src",
+    "android": {
+      "javaPackageName": "com.bmoniembeddedsdk"
+    }
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-native": ">=0.76.0"
+  },
+  "devDependencies": {
+    "react": "18.3.1",
+    "react-native": "0.76.5",
+    "react-native-builder-bob": "^0.30.0",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.4.0"
+  },
+  "react-native-builder-bob": {
+    "source": "src",
+    "output": "lib",
+    "targets": [
+      "commonjs",
+      "module",
+      [
+        "typescript",
+        {
+          "project": "tsconfig.json"
+        }
+      ]
+    ]
+  }
+}
