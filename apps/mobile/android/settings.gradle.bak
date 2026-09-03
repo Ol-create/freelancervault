@@ -1,0 +1,21 @@
+pluginManagement {
+    includeBuild("../../../apps/mobile/node_modules/@react-native/gradle-plugin")
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+rootProject.name = 'mobile'
+include ':app'
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url("$rootDir/../../node_modules/react-native/android") }
+        maven { url("$rootDir/../../node_modules/@react-native/codegen/android") }
+        maven { url("https://www.jitpack.io") }
+    }
+}

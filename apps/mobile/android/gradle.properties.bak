@@ -1,0 +1,6 @@
+org.gradle.jvmargs=-Xmx2048M -Dfile.encoding=UTF-8
+org.gradle.parallel=true
+org.gradle.caching=true
+ANDROID_BUILD_SEARCH_FOR_LOCATIONS_FIRST=true
+reactNativeVersion=0.74.5
+hermesEnabled=true
