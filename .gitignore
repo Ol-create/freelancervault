@@ -17,3 +17,12 @@ ios/*.xcworkspace
 # misc
 .DS_Store
 *.log
+
+# Android build outputs & local caches
+.gradle/
+.cxx/
+build/
+*.apk
+*.aab
+local.properties
+.npmrc
