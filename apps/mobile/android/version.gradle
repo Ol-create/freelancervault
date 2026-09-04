@@ -1,0 +1,13 @@
+// Dynamic version resolution from node_modules
+import groovy.json.JsonSlurper
+
+def getReactNativeVersion() {
+    def inputFile = new File(rootDir, "../node_modules/react-native/package.json")
+    def jsonSlurper = new JsonSlurper()
+    def packageJson = jsonSlurper.parseText(inputFile.text)
+    return packageJson.version
+}
+
+ext.react = [
+    reactNativeVersion: getReactNativeVersion()
+]
